@@ -1,0 +1,36 @@
+name: Check Branch Name Format
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check branch name format
+        run: |
+          branch_name="${{ github.ref }}"
+          
+          branch_name="${branch_name#refs/heads/}"
+          echo "Branch name: $branch_name"
+
+          # Регулярные выражения для проверки форматов веток
+          main_regex="^main$"
+          develop_regex="^develop$"
+          feature_regex="^feature/VM-[0-9]+(--.+)?$"
+          fix_regex="^fix/VM-[0-9]+(--.+)?$"
+
+          # Проверяем, соответствует ли название ветки одному из форматов
+          if [[ ! "$branch_name" =~ $main_regex && \
+                ! "$branch_name" =~ $develop_regex && \
+                ! "$branch_name" =~ $feature_regex && \
+                ! "$branch_name" =~ $fix_regex ]]; then
+            echo "Error: Branch name '$branch_name' does not match the required format."
+            echo "Valid formats are: 'main', 'develop', 'feature/VM-<id>', 'feature/VM-<id>--<title>', 'fix/VM-<id>', 'fix/VM-<id>--<title>'"
+            exit 1
+          else
+            echo "Branch name '$branch_name' is in the correct format."
+          fi

@@ -1,0 +1,87 @@
+name: Validate All Commit Messages on Push
+
+on:
+  push:
+
+jobs:
+  validate-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base branch for comparison
+        run: |
+          BASE_REF=${{ github.event.before }}
+          HEAD_REF=${{ github.event.after }}
+
+          echo "Checking commits from $BASE_REF to $HEAD_REF"
+
+          # Проверка, если это новая ветка
+          if [[ "$BASE_REF" == "0000000000000000000000000000000000000000" ]]; then
+            echo "New branch detected, checking only the latest commit."
+            COMMITS=$(git log -1 --pretty=format:"%H")
+          else
+            # Получаем список коммитов между before и after
+            COMMITS=$(git log $BASE_REF..$HEAD_REF --pretty=format:"%H")
+          fi
+
+          if [[ -z "$COMMITS" ]]; then
+            echo "No new commits to check!"
+            exit 0
+          fi
+
+          for COMMIT in $COMMITS; do
+            echo "==============================="
+            echo "Checking commit: $COMMIT"
+            COMMIT_MSG=$(git log -1 --pretty=%B $COMMIT)
+            echo "$COMMIT_MSG"
+            echo "-------------------------------"
+
+            # Разбиваем сообщение на части
+            HEADER=$(echo "$COMMIT_MSG" | head -n 1)
+            BODY=$(echo "$COMMIT_MSG" | sed -n '3p')
+            FOOTER=$(echo "$COMMIT_MSG" | tail -n 1)
+
+            echo "  HEADER: $HEADER"
+            echo "  BODY: $BODY"
+            echo "  FOOTER: $FOOTER"
+
+            # Проверка 1. HEADER
+            HEADER_REGEX='^(feat|fix|refactor|chore|test|docs|style|revert)\([a-z0-9\-]+\):\s.{1,72}$'
+            if [[ ! "$HEADER" =~ $HEADER_REGEX ]]; then
+              echo "Commit $COMMIT has an invalid header!"
+              echo "Expected: <type>(<scope>): <subject> (max 72 chars)"
+              exit 1
+            fi
+
+            # Проверка 2. Пустая строка после заголовка
+            SECOND_LINE=$(echo "$COMMIT_MSG" | sed -n '2p')
+            if [[ "$SECOND_LINE" != "" ]]; then
+              echo "Commit $COMMIT is missing a blank line between header and body/footer!"
+              exit 1
+            fi
+
+            # Проверка 3. Пустая строка между body и footer (если есть body)
+            if [[ -n "$BODY" ]]; then
+              FOURTH_LINE=$(echo "$COMMIT_MSG" | sed -n '4p')
+              if [[ "$FOURTH_LINE" != "" ]]; then
+                echo "Commit $COMMIT is missing a blank line between body and footer!"
+                exit 1
+              fi
+            fi
+
+            # Проверка 4. Footer должен содержать Task ID (обязательно)
+            FOOTER_REGEX='VM-[0-9]+'
+            if [[ ! "$FOOTER" =~ $FOOTER_REGEX ]]; then
+              echo "Commit $COMMIT footer must contain a Task ID (VM-xx)"
+              exit 1
+            fi
+
+            echo "Commit $COMMIT passed validation!"
+          done
+
+          echo "All commits passed!"
