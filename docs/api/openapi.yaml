@@ -1,0 +1,412 @@
+openapi: 3.0.0
+info:
+  title: Visual Music
+  version: 1.0.0
+tags:
+  - name: Аутентификация
+    description: Регистрация, авторизация и управление пользователями
+  - name: Подписки
+    description: Управление подписками
+  - name: Обложки
+    description: Работа с обложками
+  - name: Коллекции обложек
+    description: Пользовательские коллекции обложек
+
+paths:
+  /api/v1/auth/register:
+    post:
+      tags:
+        - Аутентификация
+      summary: Регистрация пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Успешная регистрация
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                  message:
+                    type: string
+
+  /api/v1/auth/login:
+    post:
+      tags:
+        - Аутентификация
+      summary: Авторизация через логин и пароль
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Успешный вход
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+
+  /api/v1/auth/oauth:
+    post:
+      tags:
+        - Аутентификация
+      summary: Авторизация через сторонний сервис (OAuth 2.0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider:
+                  type: string
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Успешная авторизация
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+
+  /api/v1/users/{user_id}:
+    put:
+      tags:
+        - Аутентификация
+      summary: Редактирование пользователя
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Данные пользователя успешно изменены
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /api/v1/users/{user_id}/delete:
+    delete:
+      tags:
+        - Аутентификация
+      summary: Удаление пользователя
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Пользователь успешно удален
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /api/v1/subscription:
+    post:
+      tags:
+        - Подписки
+      summary: Оплата подписки
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                plan:
+                  type: string
+                  enum: [basic, premium, family]
+                payment_method:
+                  type: string
+                  enum: [card, paypal, apple_pay]
+      responses:
+        '200':
+          description: Подписка активирована
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  expires_at:
+                    type: string
+                    format: date
+
+  /api/v1/generate-cover:
+    post:
+      tags:
+        - Обложки
+      summary: Генерация обложки
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                track_id:
+                  type: integer
+                mood_label:
+                  type: string
+                genre:
+                  type: string
+                style:
+                  type: string
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cover_id:
+                    type: integer
+                  cover_image_url:
+                    type: string
+
+  /api/v1/covers/{cover_id}:
+    get:
+      tags:
+        - Обложки
+      summary: Получение обложки по её ID
+      parameters:
+        - name: cover_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cover_id:
+                    type: integer
+                  cover_image_url:
+                    type: string
+                  mood_label:
+                    type: string
+                  genre:
+                    type: string
+                  style:
+                    type: string
+                  is_favorite:
+                    type: boolean
+                  is_saved:
+                    type: boolean
+
+  /api/v1/covers/{cover_id}/delete:
+    delete:
+      tags:
+        - Обложки
+      summary: Удаление обложки
+      parameters:
+        - name: cover_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Обложка успешно удалена
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  cover_image_url:
+                    type: string
+
+  /api/v1/users/covers:
+    get:
+      tags:
+        - Коллекции обложек
+      summary: Получение списка обложек пользователей с фильтрацией и сортировкой
+      parameters:
+        - name: genre
+          in: query
+          schema:
+            type: string
+        - name: mood
+          in: query
+          schema:
+            type: string
+        - name: style
+          in: query
+          schema:
+            type: string
+        - name: sort
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cover_id:
+                      type: integer
+                    cover_image_url:
+                      type: string
+                    likes:
+                      type: integer
+
+  /api/v1/users/{user_id}/covers:
+    get:
+      tags:
+        - Коллекции обложек
+      summary: Получение обложек, сгенерированных пользователем
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cover_id:
+                      type: integer
+                    cover_image_url:
+                      type: string
+
+  /api/v1/users/{user_id}/saved-covers:
+    get:
+      tags:
+        - Коллекции обложек
+      summary: Получение сохранённых пользователем обложек
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cover_id:
+                    type: integer
+                  cover_image_url:
+                    type: string
+
+  /api/v1/covers/{cover_id}/saved-covers:
+    post:
+      tags:
+        - Коллекции обложек
+      summary: Добавить обложку в сохраненные
+      parameters:
+        - name: cover_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Обложка успешно сохранена
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /api/v1/covers/{cover_id}/saved-covers/delete:
+    delete:
+      tags:
+        - Коллекции обложек
+      summary: Удалить обложку из сохраненных
+      parameters:
+        - name: cover_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Обложка успешно удалена из сохраненных
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
