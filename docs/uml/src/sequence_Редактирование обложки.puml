@@ -1,0 +1,45 @@
+@startuml Редактирование обложки
+
+autonumber
+
+actor "Пользователь" as User
+participant "Приложение" as App
+participant "Редактор изображений" as Editor
+participant "Устройство" as Device
+
+User -> App: Выбрать обложку
+User -> App: Нажать "Открыть в редакторе"
+App -> Editor: Открыть обложку в редакторе
+
+alt #LightGreen User с подпиской
+    loop #WhiteSmoke Внесение изменений
+        User -> Editor: Выбрать действие
+        Editor -> User: Показать интерфейс редактирования
+        alt #FloralWhite Действие "Добавить текст"
+            User -> Editor: Ввести текст
+            Editor -> Editor: Применить текст к обложке
+        else Действие "Разметка"
+            User -> Editor: Добавить разметку
+            Editor -> Editor: Добавить разметку к обложке
+        else Действие "Добавить фото"
+            User -> Editor: Загрузить фото
+            Editor -> Editor: Наложить фото на обложку
+        else Действие "Применить фильтр"
+            User -> Editor: Выбрать фильтр
+            Editor -> Editor: Применить фильтр к обложке
+        end
+        User -> Editor: Подтвердить изменения
+    end
+else #Salmon User без подписки
+    User -> Editor: Выбрать фильтр
+    Editor -> Editor: Применить фильтр к обложке
+    User -> Editor: Подтвердить изменения
+end
+
+Editor -> App: Вернуть отредактированную обложку
+App -> User: Показать результат
+User -> App: Сохранить изображение
+App -> Device: Сохранить на устройство
+Device -> User: Подтверждение сохранения
+
+@enduml

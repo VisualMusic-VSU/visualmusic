@@ -1,0 +1,37 @@
+@startuml Генерация обложки. Конкретный запрос
+
+autonumber
+
+actor Пользователь
+participant "Устройство" as Device
+participant "Сервер" as Server
+participant "Сервис" as Service
+participant "Pipeline" as Pipeline
+participant "TextToImageNN" as ImageNN
+
+Пользователь -> Device: Отправить запрос
+Device -> Server: Отправить запрос
+
+Server -> Service: Передача DTO
+Service -> Service: Валидация DTO
+
+alt #SpringGreen DTO валиден
+    Service -> ImageNN: Отправить запрос
+    alt #LightGreen Успешная генерация изображения
+        ImageNN --> Service: Вернуть изображение
+        Service --> Server: Вернуть изображение
+    else #Salmon Ошибка генерации
+        Pipeline --> Service: Прокинуть ошибку
+        Service --> Server: Вернуть ошибку
+    end
+
+else #Salmon DTO не валиден
+
+    Service --> Server: Вернуть ошибку
+
+end
+
+Server --> Device: Вернуть результат
+Device --> Пользователь: Показать результат
+
+@enduml

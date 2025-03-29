@@ -1,0 +1,133 @@
+Table users {
+	id integer [ pk, increment, not null, unique ]
+	email varchar [ not null ]
+	username varchar [ not null ]
+	pass_hash text [ not null ]
+	created_time timestamptz [ not null ]
+}
+
+Table covers {
+	id integer [ pk, increment, not null, unique ]
+	user_id integer [ not null ]
+	title varchar [ not null ]
+	image_url text
+	created_time timestamptz [ not null ]
+	group_id integer [ not null ]
+}
+
+Table cover_groups {
+	id integer [ pk, increment, not null, unique ]
+	user_id integer [ not null ]
+	title text [ not null ]
+	created_date timestamptz [ not null ]
+	is_private boolean [ not null ]
+	mood_id integer [ not null ]
+}
+
+Table cover_generations {
+	id integer [ pk, increment, not null, unique ]
+	user_id integer [ not null ]
+	cover_id integer [ not null ]
+	status varchar [ not null ]
+	start_time timestamptz [ not null ]
+	end_time timestamptz [ not null ]
+}
+
+Table saved_groups {
+	id integer [ pk, not null ]
+	user_id integer [ not null ]
+	group_id integer [ not null ]
+}
+
+Table subscription_plans {
+	id integer [ pk, increment, not null, unique ]
+	type varchar [ not null ]
+	description text [ not null ]
+	currency_code varchar [ not null ]
+	requests_constraint integer [ not null ]
+	price decimal [ not null ]
+}
+
+Table subscription_purchases {
+	id integer [ pk, increment, not null, unique ]
+	user_id integer [ not null ]
+	subscription_plan_id integer [ not null ]
+	status varchar [ not null ]
+	amount integer [ not null ]
+	purchase_time timestamptz [ not null ]
+}
+
+Table user_subscriptions {
+	id integer [ pk, increment, not null, unique ]
+	subscription_plan_id integer [ not null ]
+	start_time timestamptz [ not null ]
+	end_time timestamptz [ not null ]
+	user_id integer [ not null ]
+}
+
+Table genres {
+	id integer [ pk, increment, not null, unique ]
+	name varchar [ not null ]
+}
+
+Table moods {
+	id integer [ pk, increment, not null, unique ]
+	name varchar [ not null ]
+}
+
+Table cover_groups_genres {
+	cover_group_id integer [ pk, not null ]
+	genre_id integer [ pk, not null ]
+}
+
+Ref  {
+	cover_groups.id > users.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	subscription_purchases.user_id > users.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	cover_generations.user_id > users.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	cover_generations.cover_id - covers.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	saved_groups.id > users.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	cover_groups.id < saved_groups.user_id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	user_subscriptions.user_id - users.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	user_subscriptions.subscription_plan_id > subscription_plans.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	moods.id < cover_groups.mood_id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	genres.id < cover_groups_genres.genre_id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	cover_groups_genres.cover_group_id > cover_groups.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	covers.group_id > cover_groups.id [ delete: no action, update: no action ]
+}
+
+Ref  {
+	subscription_purchases.subscription_plan_id > subscription_plans.id [ delete: no action, update: no action ]
+}

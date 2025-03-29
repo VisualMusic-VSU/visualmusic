@@ -1,0 +1,74 @@
+@startuml Генерация обложки. Базовый режим
+
+autonumber
+
+actor Пользователь
+participant "Устройство" as Device
+participant "Сервер" as Server
+participant "Сервис" as Service
+participant "Pipeline" as Pipeline
+participant "AudioMoodGenre\nNN" as ToneNN
+participant "AudioToText\nNN" as TextNN
+participant "LLM" as LLM
+participant "TextToImagen\nNN" as ImageNN
+
+Пользователь -> Device: Отправить запрос
+Device -> Server: Отправить запрос
+
+Server -> Service: Передача DTO
+Service -> Service: Валидация DTO
+
+alt #SpringGreen DTO валиден
+    Service -> Pipeline: Передать DTO
+
+    alt #LightGreen Определение тона, Распознование текста, Генерация изображения без ошибок
+        Pipeline -> Pipeline: Этап 1: Определение тона
+
+        alt #LightGreen Жанр и Настроение указаны
+            Pipeline -> Pipeline: Использовать указанные данные
+        else #LightGoldenRodYellow Жанры или Настроение не указаны
+            Pipeline -> ToneNN: Отправить аудио
+            ToneNN --> Pipeline: Вернуть Жанр и Настроение
+            Pipeline -> Pipeline: Записать Жанр и Настроение
+        end
+
+
+
+        Pipeline -> Pipeline: Этап 2: Распознавание текста
+
+        alt #LightGreen Текст указан
+            Pipeline -> Pipeline: Использовать указанный текст
+        else #LightGoldenRodYellow Текст не указан
+            Pipeline -> TextNN: Отправить аудио
+            TextNN --> Pipeline: Вернуть текст песни
+            Pipeline -> Pipeline: Записать текст
+        end
+
+        Pipeline -> Pipeline: Этап 3: Формирование запроса
+        Pipeline -> LLM: Отправить итоговое
+        LLM --> Pipeline: Вернуть созданный prompt
+
+
+
+        Pipeline -> Pipeline: Этап 4: Генерация изображения
+        Pipeline -> ImageNN: Отправить prompt
+
+        ImageNN --> Pipeline: Вернуть изображение
+        Pipeline --> Service: Вернуть изображение
+        Service --> Server: Вернуть изображение
+
+    else #Salmon Произошла ошибка в Pipeline
+        Pipeline --> Service: Вернуть ошибку
+        Service --> Server: Вернуть ошибку
+    end
+
+else #Salmon DTO не валиден
+
+    Service --> Server: Вернуть ошибку
+
+end
+
+Server --> Device: Вернуть результат
+Device --> Пользователь: Показать результат
+
+@enduml
