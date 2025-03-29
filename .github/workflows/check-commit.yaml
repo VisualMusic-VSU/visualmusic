@@ -75,7 +75,7 @@ jobs:
             fi
 
             # Проверка 4. Footer должен содержать Task ID (обязательно)
-            FOOTER_REGEX='VM-[0-9]+'
+            FOOTER_REGEX='(VM-[0-9]+)(, (VM-[0-9]+))*'
             if [[ ! "$FOOTER" =~ $FOOTER_REGEX ]]; then
               echo "Commit $COMMIT footer must contain a Task ID (VM-xx)"
               exit 1
