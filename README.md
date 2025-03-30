@@ -4,6 +4,8 @@
 
 ## Команда
 
+Работу над проектом ведет **3 команда 6 группы**:
+
 - [Белых Егор](https://github.com/popipopka) - Developer, DevOps
 - [Родионова Алексей](https://github.com/AlexeyRodi) - Developer
 - [Липовцев Алексей](https://github.com/Kar9ker) - PM, Designer
