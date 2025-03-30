@@ -7,9 +7,9 @@
 Работу над проектом ведет **3 команда 6 группы**:
 
 - [Белых Егор](https://github.com/popipopka) - Developer, DevOps
-- [Родионова Алексей](https://github.com/AlexeyRodi) - Developer
+- [Родионов Алексей](https://github.com/AlexeyRodi) - Developer
 - [Липовцев Алексей](https://github.com/Kar9ker) - PM, Designer
-- [Бажанова Иван](https://github.com/solarywebster) - Ml-engineer
+- [Бажанов Иван](https://github.com/solarywebster) - Ml-engineer
 - [Сейдалиев Рустам](https://github.com/R7TM) - Analyst
 - [Тамбовцев Глеб](https://github.com/scamb1k) - QA
 
