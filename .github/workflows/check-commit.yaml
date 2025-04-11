@@ -51,7 +51,7 @@ jobs:
             echo "  FOOTER: $FOOTER"
 
             # Проверка 1. HEADER
-            HEADER_REGEX='^(feat|fix|refactor|chore|test|docs|style|revert)(\([a-z0-9\-]+\))?:\s.{1,72}$'
+            HEADER_REGEX='^(feat|fix|refactor|chore|test|docs|style|revert|merge)(\([a-z0-9\-]+\))?:\s.{1,72}$'
             if [[ ! "$HEADER" =~ $HEADER_REGEX ]]; then
               echo "Commit $COMMIT has an invalid header!"
               echo "Expected: <type>(<scope>): <subject> (max 72 chars)"
