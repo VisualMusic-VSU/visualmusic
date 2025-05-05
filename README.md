@@ -20,6 +20,8 @@
 
 ## Документы
 
+- [Отчеты PM](https://github.com/VisualMusic-VSU/visualmusic/tree/main/docs/report)
+
 ### Первый этап. ТЗ
 
 - Презентация [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/tech/first-stage-slides.pdf) [figma](https://www.figma.com/slides/bBSw7iFlTYfgRwiUWLCN4F/Visual-Music?node-id=5-2&t=K5baAyLksduouTgr-0)
@@ -43,17 +45,13 @@
 
 ### Второй этап. MVP
 
-- Презентация [.pdf] () [figma] ()
-- Видео-презентация [rutube] ()
+- Презентация [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/mvp/slides.pdf) [figma](https://www.figma.com/slides/89cMtbE3mxPvYJXQ1TYIyX/second-stage-slides?node-id=1-42&t=DcGBpu2SOytqwFDc-1)
+- Видео-презентация [rutube](https://rutube.ru/video/private/a438842cbe698cfa369fbc26e5ce01a1/?p=a1MVz8F0CGAO0DCLSFPf0A)
 
 ---
 
-- [Отчеты PM] () 
-
----
-
-- [Тест план] ()
-- [Тест кейсы] ()
+- Тест план [.docx](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/test/test-plan.docx) [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/test/test-plan.pdf)
+- Тест кейсы [.docx](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/test/test-cases.docx) [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/test/test-cases.pdf)
 
 ### Правила репозиториев
 
