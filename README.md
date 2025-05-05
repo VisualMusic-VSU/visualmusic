@@ -20,7 +20,9 @@
 
 ## Документы
 
-- Презентация [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/tech/slides.pdf) [figma](https://www.figma.com/slides/bBSw7iFlTYfgRwiUWLCN4F/Visual-Music?node-id=5-2&t=K5baAyLksduouTgr-0)
+### Первый этап. ТЗ
+
+- Презентация [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/tech/first-stage-slides.pdf) [figma](https://www.figma.com/slides/bBSw7iFlTYfgRwiUWLCN4F/Visual-Music?node-id=5-2&t=K5baAyLksduouTgr-0)
 - Видео-презентация [rutube](https://rutube.ru/video/private/c038ac7ecf928cb17a5af9129449a83b/?p=-S6wgQMQgaTgXI3ufxKEpw&r=a)
 
 ---
@@ -39,6 +41,20 @@
 - Схема API [openapi](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/api/openapi.yaml) [swagger](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/api/swagger.pdf)
 - [UML-диаграммы](https://github.com/VisualMusic-VSU/visualmusic/tree/main/docs/uml)
 
+### Второй этап. MVP
+
+- Презентация [.pdf] () [figma] ()
+- Видео-презентация [rutube] ()
+
+---
+
+- [Отчеты PM] () 
+
+---
+
+- [Тест план] ()
+- [Тест кейсы] ()
+
 ### Правила репозиториев
 
 - [Правила коммитов, наименование веток и PR](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/git/rules.pdf)
@@ -49,9 +65,11 @@
 - [Branch Name Actions](https://github.com/VisualMusic-VSU/visualmusic/blob/main/.github/workflows/check-branch-name.yaml)
 - [PR Actions](https://github.com/VisualMusic-VSU/visualmusic/blob/main/.github/workflows/check-pull-request.yaml)
 
-## Чек-лист
+## Кросс-проверка
 
-- Наш чек-лист [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/check/check.pdf) [.xlsx](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/business/check.xlsx)
+### Первый этап
+
+- Наш чек-лист [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/check/first-stage-check.pdf) [.xlsx](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/business/first-stage-check.xlsx)
 
 ##### Проверяли нас
 
@@ -59,3 +77,14 @@
 - 6 группа 4 команда [git](https://github.com/Mixing-Visionary) [.pdf](https://github.com/Mixing-Visionary/Docs/blob/master/CheckList/Checklist.pdf)
 - 4 группа 2 команда [git](https://github.com/I-want-pizza/QWality.git)
 - 4 группа 1 команда [git](https://github.com/orgs/PublicTransport2025/repositories) [.pdf](https://github.com/PublicTransport2025/Docs/blob/main/%D0%9A%D1%80%D0%BE%D1%81%D1%81-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8.pdf)
+
+### Второй этап
+
+- Наш чек-лист [.pdf] () [.xlsx] ()
+
+##### Проверяли нас
+
+- 7 группа 2 команда [git] () [.pdf] ()
+- 6 группа 4 команда [git] () [.pdf] ()
+- 4 группа 2 команда [git] () [.pdf] ()
+- 4 группа 1 команда [git] () [.pdf] ()
