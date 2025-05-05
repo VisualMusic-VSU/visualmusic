@@ -63,6 +63,11 @@
 - [Branch Name Actions](https://github.com/VisualMusic-VSU/visualmusic/blob/main/.github/workflows/check-branch-name.yaml)
 - [PR Actions](https://github.com/VisualMusic-VSU/visualmusic/blob/main/.github/workflows/check-pull-request.yaml)
 
+### CI/CD
+
+- Backend
+  - [Develop CI/CD](https://github.com/VisualMusic-VSU/visualmusic-backend/blob/develop/.github/workflows/deploy-develop.yaml)
+
 ## Кросс-проверка
 
 ### Первый этап
