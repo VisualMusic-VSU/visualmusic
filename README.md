@@ -87,7 +87,7 @@
 
 ##### Проверяли нас
 
-- 7 группа 2 команда [git](https://github.com/orgs/ReflectAppTP)
+- 7 группа 2 команда [git](https://github.com/orgs/ReflectAppTP) [.pdf](https://github.com/ReflectAppTP/documentation/blob/main/%D0%A7%D0%B5%D0%BA%20%D0%9B%D0%B8%D1%81%D1%82%202%20MVP.pdf)
 - 6 группа 4 команда [git](https://github.com/Mixing-Visionary) [.pdf](https://github.com/Mixing-Visionary/Docs/blob/master/CheckList/Checklist_2.pdf)
-- 4 группа 2 команда [git](https://github.com/I-want-pizza/QWality.git)
-- 4 группа 1 команда [git](https://github.com/orgs/PublicTransport2025/repositories)
+- 4 группа 2 команда [git](https://github.com/I-want-pizza/QWality.git) [.pdf](https://github.com/I-want-pizza/QWality/blob/88be92d58178c8b91e3ab7b066cc00c24d141450/docs/teams_score/%D0%A7%D0%B5%D0%BA%D0%BB%D0%B8%D1%81%D1%82%202%20%D1%8D%D1%82%D0%B0%D0%BF.pdf)
+- 4 группа 1 команда [git](https://github.com/orgs/PublicTransport2025/repositories) [.pdf](https://github.com/PublicTransport2025/Docs/blob/main/%D0%AD%D1%82%D0%B0%D0%BF%20MVP/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82%202025%20%D0%A7%D0%B5%D0%BA%D0%BB%D0%B8%D1%81%D1%82%202%20%D1%8D%D1%82%D0%B0%D0%BF.pdf)
