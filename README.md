@@ -83,11 +83,11 @@
 
 ### Второй этап
 
-- Наш чек-лист [.pdf] () [.xlsx] ()
+- Наш чек-лист [.pdf](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/check/second-stage-check.pdf) [.xlsx](https://github.com/VisualMusic-VSU/visualmusic/blob/main/docs/check/second-stage-check.xlsx)
 
 ##### Проверяли нас
 
-- 7 группа 2 команда [git] () [.pdf] ()
-- 6 группа 4 команда [git] () [.pdf] ()
-- 4 группа 2 команда [git] () [.pdf] ()
-- 4 группа 1 команда [git] () [.pdf] ()
+- 7 группа 2 команда [git](https://github.com/orgs/ReflectAppTP)
+- 6 группа 4 команда [git](https://github.com/Mixing-Visionary) [.pdf](https://github.com/Mixing-Visionary/Docs/blob/master/CheckList/Checklist_2.pdf)
+- 4 группа 2 команда [git](https://github.com/I-want-pizza/QWality.git)
+- 4 группа 1 команда [git](https://github.com/orgs/PublicTransport2025/repositories)
